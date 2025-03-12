@@ -15,6 +15,7 @@ notes/yt_urls.md
 # Data
 data/
 output/
+.env
 
 # Temp ignores
 test-notation.ipynb
