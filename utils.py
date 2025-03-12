@@ -75,5 +75,23 @@ def play_wav(wav):
 # Play the song
 def play_song(song):
     basename = save_song_abc(song)
-    r = abc2midi("data/temp.abc")
-    return play_wav("data/temp.wav")
+    temp_abc = get_abc_path(basename + ".abc")
+    abc2wav(temp_abc)
+    wav_path = get_wav_path("temp.wav")
+    if wav_path == 0:
+        return "Error: Could not convert ABC to WAV"
+    return play_wav(wav_path)
+
+# Getters
+
+
+def get_midi_path(file):
+    return os.path.join("output", "midi", file)
+
+
+def get_wav_path(file):
+    return os.path.join("output", "wav", file)
+
+
+def get_abc_path(file):
+    return os.path.join("data", file)
