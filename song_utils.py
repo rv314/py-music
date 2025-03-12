@@ -1,6 +1,6 @@
-
 import numpy as np
 import simpleaudio as sa
+from bit import get_freq
 
 
 def linear(t, initial: float, target: float):
@@ -33,8 +33,8 @@ def ADSR(t, attack, decay, sustain, release):  # release not implemented YET
     return adsr, release
 
 
-def get_freq(note):
-    return (440. * (2 ** ((note - 69) / 12.)))
+""" def get_freq(note):
+    return (440. * (2 ** ((note - 69) / 12.))) """
 
 
 def get_note(t, wave, pitch, velocity):
