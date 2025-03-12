@@ -1846,6 +1846,7 @@ dependencies = [
     { name = "mitdeeplearning" },
     { name = "music21" },
     { name = "pandas" },
+    { name = "simpleaudio" },
     { name = "timidity" },
     { name = "torch" },
 ]
@@ -1857,6 +1858,7 @@ requires-dist = [
     { name = "mitdeeplearning", specifier = ">=0.7.5" },
     { name = "music21", specifier = ">=9.5.0" },
     { name = "pandas", specifier = ">=2.2.3" },
+    { name = "simpleaudio", specifier = ">=1.0.4" },
     { name = "timidity", specifier = ">=0.1.2" },
     { name = "torch", specifier = ">=2.6.0" },
 ]
