@@ -35,7 +35,7 @@ def extract_song_snippet(text):
 
 # Save song to ABC format
 def save_song_abc(song, filename="temp"):
-    save_path = "/data/{}.abc".format(filename)
+    save_path = os.path.join("data", filename + ".abc")
     with open(save_path, "w") as f:
         f.write(song)
     return filename
