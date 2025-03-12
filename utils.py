@@ -4,7 +4,9 @@ import subprocess
 import urllib
 import numpy as np
 from music21 import converter, midi, stream
-from timidity import Parser, play_notes
+# from timidity import Parser, play_notes
+from song_utils import play_notes
+from midi_parser import Parser
 from scipy.signal import square, sawtooth
 from scipy.io import wavfile
 
@@ -51,40 +53,27 @@ def abc2wav(abc, wav):
 def abc2midi(abc):
     conv = converter.parse(abc)
     output_path = os.path.join("output", "midi")
-    conv.write("midi", os.path.join(output_path, "temp.mid"))
+    midi = conv.write("midi", os.path.join(output_path, "temp.mid"))
+    return midi
 
+
+# ABC to WAV
+def abc2wav(abc):
+    wav_path = os.path.join("output", "wav", "temp.wav")
+    midi_path = abc2midi(abc)
+    ps = Parser(midi_path)
+    audio = play_notes(*ps.parse(), sawtooth, wait_done=False)
+    wavfile.write(wav_path, 44100, audio)
 
 # Play audio file
+
+
 def play_wav(wav):
     return Audio(wav)
 
 
 # Play the song
-# TODO: Implement this function
-
-# Bitwise operations
-def get_bit(x: int, n: int):
-    return (x >> n) & 1
-
-
-def unset_bit(x: int, n: int):
-    return x & ~(1 << n)
-
-
-def get_freq(note: int):
-    return 440. * (2 ** ((note - 69.) / 12.))
-
-
-midi_skips = {
-    0xA: 2,
-    0xB: 2,
-    0xC: 1,
-    0xD: 1,
-    0xE: 2
-}
-
-meta_not_skips = [
-    0x2F,
-    0x51,
-    0x58,
-]
+def play_song(song):
+    basename = save_song_abc(song)
+    r = abc2midi("data/temp.abc")
+    return play_wav("data/temp.wav")
