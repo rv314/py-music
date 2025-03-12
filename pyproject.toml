@@ -8,6 +8,8 @@ dependencies = [
     "ipykernel>=6.29.5",
     "matplotlib>=3.10.1",
     "mitdeeplearning>=0.7.5",
+    "music21>=9.5.0",
     "pandas>=2.2.3",
+    "timidity>=0.1.2",
     "torch>=2.6.0",
 ]
