@@ -60,8 +60,9 @@ def play_wav(wav):
 
 
 # Play the song
+# TODO: Implement this function
 
-
+# Bitwise operations
 def get_bit(x: int, n: int):
     return (x >> n) & 1
 
