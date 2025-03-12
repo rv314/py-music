@@ -22,9 +22,8 @@ def load_data():
     songs = extract_song_snippet(text)
     return songs
 
+
 # Extract songs from the text
-
-
 def extract_song_snippet(text):
     pattern = "(^|\n\n)(.*?)\n\n"
     search_results = re.findall(
@@ -33,34 +32,31 @@ def extract_song_snippet(text):
     print("Found {} songs in text".format(len(songs)))
     return songs
 
+
 # Save song to ABC format
-
-
 def save_song_abc(song, filename="temp"):
     save_path = "/data/{}.abc".format(filename)
     with open(save_path, "w") as f:
         f.write(song)
     return filename
 
+
 # Convert ABC notation to audio file
-
-
 def abc2wav(abc, wav):
     cmd = f"abc2midi {abc} -o - | timidity -Ow -o {wav} -"
     return subprocess.call(cmd, shell=True)
 
+
 # Convert ABC to MIDI
-
-
 def abc2midi(abc):
     conv = converter.parse(abc)
     output_path = os.path.join("output", "midi")
     conv.write("midi", os.path.join(output_path, "temp.mid"))
 
+
 # Play audio file
-
-
 def play_wav(wav):
     return Audio(wav)
+
 
 # Play the song
