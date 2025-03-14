@@ -20,3 +20,6 @@ output/
 # Temp ignores
 test-notation.ipynb
 
+# Model checkpoint
+training_checkpoint/
+
