@@ -39,7 +39,9 @@ def extract_song_snippet(text):
 
 
 # Save song to ABC format
-def save_song_abc(song, filename="temp"):
+def save_song_abc(song, filename=None):
+    if filename is None:
+        filename = "temp"
     save_path = os.path.join("data", filename + ".abc")
     with open(save_path, "w") as f:
         f.write(song)
@@ -47,22 +49,23 @@ def save_song_abc(song, filename="temp"):
 
 
 # Convert ABC notation to audio file
-def abc2wav(abc, wav):
+""" def abc2wav(abc, wav):
     cmd = f"abc2midi {abc} -o - | timidity -Ow -o {wav} -"
-    return subprocess.call(cmd, shell=True)
+    return subprocess.call(cmd, shell=True) """
 
 
 # Convert ABC to MIDI
 def abc2midi(abc):
-    conv = converter.parse(abc)
-    output_path = os.path.join("output", "midi")
-    midi = conv.write("midi", os.path.join(output_path, "temp.mid"))
+    abc_file = f'{abc}.abc'
+    conv = converter.parse(os.path.abspath(get_abc_path(abc_file)))
+    output_path = os.path.abspath(get_midi_path(abc))
+    midi = conv.write("midi", f'{output_path}.mid')
     return midi
 
 
 # ABC to WAV
 def abc2wav(abc):
-    wav_path = os.path.join("output", "wav", "temp.wav")
+    wav_path = os.path.abspath(get_wav_path(f'{abc}.wav'))
     midi_path = abc2midi(abc)
     ps = Parser(midi_path)
     audio = play_notes(*ps.parse(), sawtooth, wait_done=False)
@@ -72,15 +75,20 @@ def abc2wav(abc):
 
 
 def play_wav(wav):
+    print(f"Playing audio file: {wav}")
     return Audio(wav)
 
 
 # Play the song
-def play_song(song):
-    basename = save_song_abc(song)
-    temp_abc = get_abc_path(basename + ".abc")
+def play_song(song, filename=None):
+    if filename is None:
+        filename = "temp.wav"
+    else:
+        filename = filename + ".wav"
+    basename = save_song_abc(song, filename=filename)
+    temp_abc = os.path.abspath(get_abc_path(basename))
     abc2wav(temp_abc)
-    wav_path = get_wav_path("temp.wav")
+    wav_path = os.path.abspath(get_wav_path(filename))
     if wav_path == 0:
         return "Error: Could not convert ABC to WAV"
     return play_wav(wav_path)
