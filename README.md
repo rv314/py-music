@@ -1,5 +1,7 @@
 # py-music
 
+![Music Image](https://github.com/rv314/py-music/blob/master/images/music-notes-and-sound-waves.webp?raw=true)
+
 ## Description
 
 `py-music` is a Python project for generating and playing music using machine learning models. The project includes functionalities for converting ABC notation to WAV files, playing notes, and generating music using trained models.
