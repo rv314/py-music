@@ -3,6 +3,8 @@ import regex as re
 import subprocess
 import urllib
 import numpy as np
+import time
+from matplotlib import pyplot as plt
 from music21 import converter, midi, stream
 # from timidity import Parser, play_notes
 from song_utils import play_notes
@@ -11,6 +13,7 @@ from scipy.signal import square, sawtooth
 from scipy.io import wavfile
 
 from IPython.display import Audio
+from IPython import display
 
 
 def test():
@@ -82,9 +85,43 @@ def play_song(song):
         return "Error: Could not convert ABC to WAV"
     return play_wav(wav_path)
 
+# Plotter
+
+
+class Plotter:
+    def __init__(self, sec, xlabel="", ylabel="", scale=None):
+        self.xlabel = xlabel
+        self.ylabel = ylabel
+        self.sec = sec
+        self.scale = scale
+
+        self.tic = time.time()
+
+    def plot(self, data):
+        if time.time() - self.tic > self.sec:
+            plt.cla()
+
+            if self.scale is None:
+                plt.plot(data)
+            elif self.scale == "semilogx":
+                plt.semilogx(data)
+            elif self.scale == "semilogy":
+                plt.semilogy(data)
+            elif self.scale == "loglog":
+                plt.loglog(data)
+            else:
+                raise ValueError(
+                    "unrecognized parameter scale {}".format(self.scale))
+
+            plt.xlabel(self.xlabel)
+            plt.ylabel(self.ylabel)
+            display.clear_output(wait=True)
+            display.display(plt.gcf())
+
+            self.tic = time.time()
+
+
 # Getters
-
-
 def get_midi_path(file):
     return os.path.join("output", "midi", file)
 
