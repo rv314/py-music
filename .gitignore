@@ -24,3 +24,6 @@ test-notation.ipynb
 # Model checkpoint
 training_checkpoint/
 
+# Misc
+/analysis
+
