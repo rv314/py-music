@@ -42,7 +42,7 @@ def extract_song_snippet(text):
 def save_song_abc(song, filename=None):
     if filename is None:
         filename = "temp"
-    save_path = os.path.join("data", filename + ".abc")
+    save_path = os.path.abspath(get_abc_path(filename))
     with open(save_path, "w") as f:
         f.write(song)
     return filename
@@ -84,8 +84,7 @@ def play_song(song, filename=None):
     if filename is None:
         filename = "temp.wav"
     basename = save_song_abc(song, filename=filename)
-    temp_abc = os.path.abspath(get_abc_path(basename))
-    abc2wav(temp_abc)
+    abc2wav(basename)
     wav_path = os.path.abspath(get_wav_path(filename))
     if wav_path == 0:
         return "Error: Could not convert ABC to WAV"
