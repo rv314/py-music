@@ -7,8 +7,8 @@ import time
 from matplotlib import pyplot as plt
 from music21 import converter, midi, stream
 # from timidity import Parser, play_notes
-from song_utils import play_notes
-from midi_parser import Parser
+from Utils.song_utils import play_notes
+from Utils.midi_parser import Parser
 from scipy.signal import square, sawtooth
 from scipy.io import wavfile
 

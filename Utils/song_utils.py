@@ -1,6 +1,6 @@
 import numpy as np
 import simpleaudio as sa
-from bit import get_freq
+from Utils.bit import get_freq
 
 
 def linear(t, initial: float, target: float):

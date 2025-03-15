@@ -1,5 +1,5 @@
-from bit import get_bit, unset_bit
-from bit import midi_skips, meta_not_skips
+from Utils.bit import get_bit, unset_bit
+from Utils.bit import midi_skips, meta_not_skips
 from collections import namedtuple
 import logging
 
