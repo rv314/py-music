@@ -56,16 +56,16 @@ def save_song_abc(song, filename=None):
 
 # Convert ABC to MIDI
 def abc2midi(abc):
-    abc_file = f'{abc}.abc'
-    conv = converter.parse(os.path.abspath(get_abc_path(abc_file)))
+    # abc_file = f'{abc}.abc'
+    conv = converter.parse(os.path.abspath(get_abc_path(abc)))
     output_path = os.path.abspath(get_midi_path(abc))
-    midi = conv.write("midi", f'{output_path}.mid')
+    midi = conv.write("midi", output_path)
     return midi
 
 
 # ABC to WAV
 def abc2wav(abc):
-    wav_path = os.path.abspath(get_wav_path(f'{abc}.wav'))
+    wav_path = os.path.abspath(get_wav_path(abc))
     midi_path = abc2midi(abc)
     ps = Parser(midi_path)
     audio = play_notes(*ps.parse(), sawtooth, wait_done=False)
@@ -83,8 +83,6 @@ def play_wav(wav):
 def play_song(song, filename=None):
     if filename is None:
         filename = "temp.wav"
-    else:
-        filename = filename + ".wav"
     basename = save_song_abc(song, filename=filename)
     temp_abc = os.path.abspath(get_abc_path(basename))
     abc2wav(temp_abc)
@@ -131,12 +129,15 @@ class Plotter:
 
 # Getters
 def get_midi_path(file):
+    file = f'{file}.mid'
     return os.path.join("output", "midi", file)
 
 
 def get_wav_path(file):
+    file = f'{file}.wav'
     return os.path.join("output", "wav", file)
 
 
 def get_abc_path(file):
+    file = f'{file}.abc'
     return os.path.join("data", file)
