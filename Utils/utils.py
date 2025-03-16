@@ -26,7 +26,7 @@ def test():
 
 # Load the data
 def load_data():
-    with open(os.path.join('data', 'sngs.abc'), 'r') as f:
+    with open(os.path.abspath(get_data_file()), 'r') as f:
         text = f.read()
     songs = extract_song_snippet(text)
     return songs
@@ -133,18 +133,18 @@ class Plotter:
 # Getters
 def get_midi_path(file):
     file = f'{file}.mid'
-    return os.path.join("output", "midi", file)
+    return os.path.abspath(os.path.join('..', 'output', 'midi', file))
 
 
 def get_wav_path(file):
     file = f'{file}.wav'
-    return os.path.join("output", "wav", file)
+    return os.path.abspath(os.path.join('..', 'output', 'wav', file))
 
 
 def get_abc_path(file):
     file = f'{file}.abc'
-    return os.path.join("data", file)
+    return os.path.abspath(os.path.join('..', 'data', file))
 
 
 def get_data_file():
-    return os.path.join(ROOT_DIR, 'data', 'sngs.abc')
+    return os.path.abspath(os.path.join('..', 'data', 'sngs.abc'))
