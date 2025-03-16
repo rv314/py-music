@@ -16,6 +16,10 @@ from IPython.display import Audio
 from IPython import display
 
 
+# Root path
+ROOT_DIR = os.path.dirname(os.path.abspath('main.py'))
+
+
 def test():
     print("Hello World")
 
@@ -140,3 +144,7 @@ def get_wav_path(file):
 def get_abc_path(file):
     file = f'{file}.abc'
     return os.path.join("data", file)
+
+
+def get_data_file():
+    return os.path.join(ROOT_DIR, 'data', 'sngs.abc')
