@@ -148,3 +148,11 @@ def get_abc_path(file):
 
 def get_data_file():
     return os.path.abspath(os.path.join('..', 'data', 'sngs.abc'))
+
+
+def get_chkpoint_path():
+    return os.path.abspath(os.path.join('..', 'training_checkpoint'))
+
+
+def get_model_path():
+    return os.path.abspath(os.path.join('..', 'training_checkpoint'))
